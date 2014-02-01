@@ -1,17 +1,16 @@
-__all__ = ["System", "VideoLibrary"]
+__all__ = ["JSONRPC", "System", "VideoLibrary"]
 
 import ConfigParser
-import json
 import os
-import requests
 import sys
 
+import JSONRPC
 import System
 import VideoLibrary
 
+data = {}
 headers = {"content-type": "application/json"}
 payload = {"jsonrpc": "2.0", "id": 1}
-data = {}
 
 def read_config():
     config_file = os.environ["HOME"] + "/.ctrlpi/" + "settings.ini"
@@ -26,6 +25,9 @@ def read_config():
 
 if __name__ == "__main__":
     read_config()
+    c = System.System(data)
+    print(c.ping())
+    print(c.version())
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4 textwidth=80
 
