@@ -1,15 +1,14 @@
-"""
-Created on 28 January 2014
-"""
-
 import JSONRPC
 
 class System(JSONRPC.JSONRPC):
     """
+    .. class:: System
+
     Controls the basic state of XMBC system.
 
-    .. todo:: Implement failing procedure. I kind of "You have no power here"
-    message.
+    Inherits from *JSONRPC* class.
+
+    .. todo:: Implement failing procedure.
 
     :Author:  Willian Paixao <willian.paixaoo@gmail.com>
     :Version: 0.01
