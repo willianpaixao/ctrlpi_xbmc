@@ -35,6 +35,8 @@ class JSONRPC(object):
             self.payload["params"] = params
         r = requests.post(self.url, data=json.dumps(self.payload),
                 headers=self.headers)
+        self.payload.pop("method", None)
+        self.payload.pop("params", None)
         return r.json()
 
     def version(self):
