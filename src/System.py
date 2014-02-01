@@ -20,7 +20,10 @@ class System(JSONRPC.JSONRPC):
     def get_properties(self, params = {"properties": ["canshutdown",
         "cansuspend", "canhibernate", "canreboot"]}):
         r = self.post(method="System.GetProperties", params=params)
-        return r["result"]
+        if r and ("result" in r):
+            return r["result"]
+        else:
+            return False
 
     def hibernate(self):
         if self.has_permission(permission="ControlPower"):

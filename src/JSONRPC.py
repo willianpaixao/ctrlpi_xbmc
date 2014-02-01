@@ -1,7 +1,3 @@
-"""
-Created on 31 January 2014
-"""
-
 import requests
 import json
 
@@ -16,32 +12,52 @@ class JSONRPC(object):
         self.headers = object["headers"]
         self.payload = object["payload"]
 
-    def get_permission(self): return self.post(method="JSONRPC.Permission")
+    def get_permission(self):
+        r = self.post(method="JSONRPC.Permission")
+        if r and ("result" in r):
+            return r["result"]
+        else:
+            return False
 
     def has_permission(self, permission):
-        p = self.get_permission()
-        return p["result"][permission]
+        r = self.get_permission()
+        if r and ("result" in r):
+            return r["result"][permission]
+        else:
+            return False
 
     def ping(self):
-        p = self.post("JSONRPC.Ping")
-        if p["result"] == u'pong':
+        r = self.post("JSONRPC.Ping")
+        if r and (r["result"] == u"pong"):
             return True
         else:
             return False
 
     def post(self, method, params={}):
+        """
+        .. todo:: Implement a better exception handling.
+        """
         self.payload["method"] = method
         if params:
             self.payload["params"] = params
-        r = requests.post(self.url, data=json.dumps(self.payload),
-                headers=self.headers)
+        try:
+            r = requests.post(self.url, data=json.dumps(self.payload),
+                    headers=self.headers)
+        except requests.exceptions.ConnectionError:
+            return False
         self.payload.pop("method", None)
         self.payload.pop("params", None)
         return r.json()
 
     def version(self):
+        """
+        .. todo:: Implement exception handling.
+        """
         r = self.post("JSONRPC.Version")
-        return r["result"]["version"]
+        if r and ("result" in r):
+            return r["result"]["version"]
+        else:
+            return False
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4 textwidth=80
 

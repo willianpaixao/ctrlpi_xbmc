@@ -1,5 +1,3 @@
-__all__ = ["JSONRPC", "System", "VideoLibrary"]
-
 import ConfigParser
 import os
 import sys
@@ -28,6 +26,8 @@ if __name__ == "__main__":
     c = System.System(data)
     print(c.ping())
     print(c.version())
+    print(c.get_permission())
+    print(c.get_properties())
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4 textwidth=80
 
