@@ -1,10 +1,11 @@
-__all__ = ["JSONRPC", "System", "VideoLibrary"]
+__all__ = ["JSONRPC", "Playlist", "System", "VideoLibrary"]
 
 import ConfigParser
 import os
 import sys
 
 import JSONRPC
+import Playlist
 import System
 import VideoLibrary
 

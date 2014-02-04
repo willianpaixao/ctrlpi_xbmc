@@ -15,7 +15,7 @@ class System(JSONRPC.JSONRPC):
     """
 
     def __init__(self, object):
-        super(self.__class__, self).__init__(object)
+        super(System, self).__init__(object)
 
     def get_properties(self, params = {"properties": ["canshutdown",
         "cansuspend", "canhibernate", "canreboot"]}):
@@ -45,6 +45,9 @@ class System(JSONRPC.JSONRPC):
                 return False
 
     def shutdown(self):
+        """
+        Turn off the client.
+        """
         if self.has_permission(permission="ControlPower"):
             r = self.get_properties(params={"properties": ["canshutdown"]})
             if r["canshutdown"]:
