@@ -1,10 +1,7 @@
-src
-===
+ctrlpi
+======
 
 .. toctree::
    :maxdepth: 4
 
-   JSONRPC
-   System
-   VideoLibrary
    ctrlpi
