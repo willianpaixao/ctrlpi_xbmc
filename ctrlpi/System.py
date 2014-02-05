@@ -2,7 +2,7 @@ import JSONRPC
 
 class System(JSONRPC.JSONRPC):
     """
-    .. class:: ctrlpi.System
+    .. class:: System.System
 
     Controls the basic state of XMBC system.
 

@@ -21,8 +21,8 @@ class JSONRPC(object):
 
     def has_permission(self, permission):
         r = self.get_permission()
-        if r and ("result" in r):
-            return r["result"][permission]
+        if r and (permission in r):
+            return r[permission]
         else:
             return False
 
@@ -48,6 +48,14 @@ class JSONRPC(object):
         self.payload.pop("method", None)
         self.payload.pop("params", None)
         return r.json()
+
+    def result_is_ok(self, r, ok=u"OK"):
+        if r and ("result" in r):
+            if r["result"] == ok:
+                return True
+        else:
+            return False
+
 
     def version(self):
         """
