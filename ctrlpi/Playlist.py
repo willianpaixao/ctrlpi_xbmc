@@ -47,4 +47,11 @@ class Playlist(System.System):
         else:
             return False
 
+    def get_playlist_properties(self, params):
+        r = self.post(method="Playlist.GetProperties", params=params)
+        if r and ("result" in r):
+            return r["result"]
+        else:
+            return False
+
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4 textwidth=80
