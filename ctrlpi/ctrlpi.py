@@ -4,6 +4,11 @@ import sys
 
 import System
 
+__author__ = "Willian Paixao"
+__category__ = "video"
+__version__ = "0.01"
+__description__ = ""
+
 data = {}
 data["headers"] = {"content-type": "application/json"}
 data["payload"] = {"jsonrpc": "2.0", "id": 1}
