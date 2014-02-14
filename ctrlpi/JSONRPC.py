@@ -1,5 +1,4 @@
-import requests
-import json
+import RequestHandler
 
 class JSONRPC(object):
     """
@@ -8,9 +7,8 @@ class JSONRPC(object):
     """
 
     def __init__(self, object):
-        self.url = object["url"]
-        self.headers = object["headers"]
-        self.payload = object["payload"]
+        global data
+        data = object
 
     def get_permission(self):
         r = self.post(method="JSONRPC.Permission")
@@ -37,17 +35,17 @@ class JSONRPC(object):
         """
         .. todo:: Implement a better exception handling.
         """
-        self.payload["method"] = method
+        data["payload"]["method"] = method
         if params:
-            self.payload["params"] = params
+            data["payload"]["params"] = params
         try:
-            r = requests.post(self.url, data=json.dumps(self.payload),
-                    headers=self.headers)
+            r = RequestHandler.RequestHandler(data)
+            s = r.post(data["payload"])
         except requests.exceptions.ConnectionError:
             return False
-        self.payload.pop("method", None)
-        self.payload.pop("params", None)
-        return r.json()
+        data["payload"].pop("method", None)
+        data["payload"].pop("params", None)
+        return s
 
     def result_is_ok(self, r, ok=u"OK"):
         if r and ("result" in r):
