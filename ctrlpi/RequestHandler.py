@@ -7,8 +7,8 @@ class RequestHandler(object):
         global data
         data = object
 
-    def get(self, url):
-        r = requests.get(url=url)
+    def get(self, url, auth=None):
+        r = requests.get(url=url, auth=auth)
         return r.text
 
     def post(self, payload):
