@@ -1,2 +1,2 @@
-__all__ = ["JSONRPC", "Playlist", "System", "VideoLibrary"]
+__all__ = ["JSONRPC", "Playlist", "RequestHandler", "System", "VideoLibrary", "XBMCNode"]
 

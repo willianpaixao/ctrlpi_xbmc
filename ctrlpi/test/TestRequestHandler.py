@@ -2,7 +2,7 @@ import os, sys
 import unittest
 
 sys.path.insert(0, os.path.abspath('..'))
-import RequestHandler
+from client import RequestHandler
 
 class TestRequestHandler(unittest.TestCase):
 
@@ -10,14 +10,16 @@ class TestRequestHandler(unittest.TestCase):
         global data
         global r
         data = {}
-        r = RequestHandler.RequestHandler(data)
+        r = RequestHandler(data)
 
     def test_get(self):
-        print(r.get(url="http://cdimage.debian.org/debian-cd/current/i386/iso-cd/MD5SUMS"))
+        data["url"] = "http://localhost:8000/users/"
+        t = r.get(url=data["url"], auth=("willian", "1q2w3e4r"))
+        self.assertTrue("results" in t)
 
     def test_post(self):
         data["headers"] = {"content-type": "application/json"}
-        data["url"] = "http://192.168.1.35:8080/jsonrpc"
+        data["url"] = "http://192.168.1.39:8080/jsonrpc"
         data["payload"] = {"jsonrpc": "2.0", "id": 1}
         data["payload"]["method"] = "JSONRPC.Ping"
 

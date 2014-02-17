@@ -1,6 +1,6 @@
-import System
+from client import System
 
-class Playlist(System.System):
+class Playlist(System):
     """
     :Author: Willian Paixao <willian.paixaoo@gmail.com>
     :Version: 0.01

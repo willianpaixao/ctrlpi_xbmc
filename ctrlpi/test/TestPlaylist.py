@@ -11,7 +11,7 @@ class TestPlaylist(unittest.TestCase):
         data = {}
         data["headers"] = {"content-type": "application/json"}
         data["payload"] = {"jsonrpc": "2.0", "id": 1}
-        data["url"] = "http://192.168.1.22:8080/jsonrpc"
+        data["url"] = "http://192.168.1.39:8080/jsonrpc"
         r = Playlist.Playlist(data)
 
     def test_clear(self):
