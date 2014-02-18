@@ -2,17 +2,35 @@ import json
 import requests
 
 class RequestHandler(object):
+    """
+    :Author:  Willian Paixao <willian.paixaoo@gmail.com>
+    :Version: 0.01
+
+    .. class:: ctrlpi.RequestHandler
+
+    This class id responsible for send the HTTP requests, including headers,
+    authentication, proxy and make a small processing with the response.
+
+    .. todo:: Implement proxy support.
+    """
 
     def __init__(self, object):
         global data
         data = object
 
     def get(self, url, auth=None):
+        """
+        Make HTTP GET requests. Has support to HTTP simple authentication, using
+        the *auth* tuple.
+        """
         r = requests.get(url=url, auth=auth)
         return r.text
 
     def post(self, payload):
         """
+        Most important method of this class. Send POST requests to a given url,
+        with custom headers and payload.
+
         .. todo:: Implement a better exception handling.
         """
         try:
@@ -89,16 +107,16 @@ class JSONRPC(object):
 
 class System(JSONRPC):
     """
-    .. class:: System.System
+    :Author:  Willian Paixao <willian.paixaoo@gmail.com>
+    :Version: 0.01
+
+    .. class:: ctrlpi.System
 
     Controls the basic state of XMBC system.
 
     Inherits from *JSONRPC* class.
 
     .. todo:: Implement failing procedure.
-
-    :Author:  Willian Paixao <willian.paixaoo@gmail.com>
-    :Version: 0.01
     """
 
     def __init__(self, object):
@@ -117,19 +135,17 @@ class System(JSONRPC):
             r = self.get_properties(params={"properties": ["canhibernate"]})
             if r["canhibernate"]:
                 r = self.post(method="System.Hibernate")
-                if r["result"] == u"OK":
-                    return True
-                else:
-                    return False
+                return self.result_is_ok(r)
         return False
 
     def reboot(self):
+        """
+        Restart the client.
+        """
         if self.has_permission(permission="ControlPower"):
             r = self.post(method="System.Reboot")
-            if r["result"] == u"OK":
-                return True
-            else:
-                return False
+            return self.result_is_ok(r)
+        return False
 
     def shutdown(self):
         """
@@ -139,10 +155,7 @@ class System(JSONRPC):
             r = self.get_properties(params={"properties": ["canshutdown"]})
             if r["canshutdown"]:
                 r = self.post(method="System.Shutdown")
-                if r["result"] == u"OK":
-                    return True
-                else:
-                    return False
+                return self.result_is_ok(r)
         return False
 
     def suspend(self):
@@ -150,10 +163,7 @@ class System(JSONRPC):
             r = self.get_properties(params={"properties": ["cansuspend"]})
             if r["cansuspend"]:
                 r = self.post(method="System.Suspend")
-                if r["result"] == u"OK":
-                    return True
-                else:
-                    return False
+                return self.result_is_ok(r)
         return False
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4 textwidth=80
