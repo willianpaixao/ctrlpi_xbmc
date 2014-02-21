@@ -7,7 +7,7 @@
         <import addon="xbmc.python" />
     </requires>
     <extension point="xbmc.service"
-        library="ctrlpi/ctrlpi.py">
+        library="default.py">
         <provides>video</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
