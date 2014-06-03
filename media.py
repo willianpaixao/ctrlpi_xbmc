@@ -16,12 +16,46 @@ class VideoLibrary(JSONRPC):
             r = self.post(method="VideoLibrary.Clean")
             return self.result_is_ok(r)
         else:
-
             return False
 
     def export(self):
         if self.has_permission(permission="WriteFile"):
             r = self.post(method="VideoLibrary.Export")
+            return self.result_is_ok(r)
+        else:
+            return False
+
+    def get_episodes(self):
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="VideoLibrary.GetEpisodes")
+            return self.result_is_ok(r)
+        else:
+            return False
+
+    def get_movies(self):
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="VideoLibrary.GetMovies")
+            return self.result_is_ok(r)
+        else:
+            return False
+
+    def get_movie_details(self, params={}):
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="VideoLibrary.GetMovieDetails",params=params)
+            return self.result_is_ok(r)
+        else:
+            return False
+
+    def get_recently_added_movies(self, params={}):
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="VideoLibrary.GetRecentlyAddedMovies",params=params)
+            return self.result_is_ok(r)
+        else:
+            return False
+
+    def get_tvshows(self):
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="VideoLibrary.GetTVShows")
             return self.result_is_ok(r)
         else:
             return False
