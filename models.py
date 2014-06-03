@@ -1,10 +1,17 @@
-from django.db import models
+rom django.db import models
 
 class Playlist(models.Model):
     title = models.CharField(max_length=512)
     fanart_url = models.CharField(max_length=256, blank=True)
     thumbnail_url = models.CharField(max_length=256, blank=True)
-    pass
+
+class Picture(models.Model):
+    playlist = models.ForeignKey(Playlist)
+    md5sum = models.CharField(max_length=256)
+    file_url = models.CharField(max_length=256)
+    title = models.CharField(max_length=512)
+    fanart_url = models.CharField(max_length=256, blank=True)
+    thumbnail_url = models.CharField(max_length=256, blank=True)
 
 class Video(models.Model):
     playlist = models.ForeignKey(Playlist)
