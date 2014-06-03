@@ -91,9 +91,10 @@ class JSONRPC(object):
         if r and ("result" in r):
             if r["result"] == ok:
                 return True
+            else:
+                return r["result"]
         else:
             return False
-
 
     def version(self):
         """
