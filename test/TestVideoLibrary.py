@@ -20,6 +20,7 @@ class TestVideoLibrary(unittest.TestCase):
 
     def test_export(self):
         self.assertTrue(r.export())
+        self.assertTrue(r.export(params={u"options": {u"path": u"/tmp"}}))
 
     def test_get_episodes(self):
         msg="Video library not retrieved."

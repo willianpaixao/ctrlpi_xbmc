@@ -1,5 +1,45 @@
 from client import JSONRPC, System
 
+class Player(JSONRPC):
+    """
+    .. todo:: Implement failing procedure.
+
+    :Author:  Willian Paixao <willian.paixaoo@gmail.com>
+    :Version: 0.01
+    """
+
+    def __init__(self, object):
+        super(Player, self).__init__(object)
+
+    def get_active_players(self):
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="Player.GetActivePlayers")
+            s = self.result_is_ok(r)
+            if s:
+                return s
+        return False
+
+    def get_item(self, params={}):
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="Player.GetItem", params=params)
+            return self.result_is_ok(r)
+        else:
+            return False
+
+    def get_properties(self, params={}):
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="Player.GetProperties", params=params)
+            return self.result_is_ok(r)
+        else:
+            return False
+
+    def play_pause(self, params={}):
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Player.PlayPause", params=params)
+            return self.result_is_ok(r)
+        else:
+            return False
+
 class VideoLibrary(JSONRPC):
     """
     .. todo:: Implement failing procedure.
@@ -18,9 +58,12 @@ class VideoLibrary(JSONRPC):
         else:
             return False
 
-    def export(self):
+    def export(self, params={}):
+        """
+        .. todo:: Add export parameters.
+        """
         if self.has_permission(permission="WriteFile"):
-            r = self.post(method="VideoLibrary.Export")
+            r = self.post(method="VideoLibrary.Export", params=params)
             return self.result_is_ok(r)
         else:
             return False
