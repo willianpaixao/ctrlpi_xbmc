@@ -2,17 +2,18 @@ import os, sys
 import unittest
 
 sys.path.insert(0, os.path.abspath('..'))
-import Playlist
+from media import Playlist
 
 class TestPlaylist(unittest.TestCase):
 
     def setUp(self):
+        global data
         global r
         data = {}
         data["headers"] = {"content-type": "application/json"}
         data["payload"] = {"jsonrpc": "2.0", "id": 1}
-        data["url"] = "http://192.168.1.39:8080/jsonrpc"
-        r = Playlist.Playlist(data)
+        data["url"] = "http://192.168.1.4:8080/jsonrpc"
+        r = Playlist(data)
 
     def test_clear(self):
         self.assertTrue(r.clear(params={"playlistid": 0}))

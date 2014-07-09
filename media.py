@@ -1,5 +1,23 @@
 from client import JSONRPC, System
 
+class Files(JSONRPC):
+    """
+    .. todo:: Implement failing procedure.
+
+    :Author:  Willian Paixao <willian.paixaoo@gmail.com>
+    :Version: 0.01
+    """
+
+    def __init__(self, object):
+        super(Files, self).__init__(object)
+
+    def get_item(self, params={}):
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="Player.GetItem", params=params)
+            return self.result_is_ok(r)
+        else:
+            return False
+
 class Player(JSONRPC):
     """
     .. todo:: Implement failing procedure.
@@ -75,6 +93,13 @@ class VideoLibrary(JSONRPC):
         else:
             return False
 
+    def get_episode_details(self, params={}):
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="VideoLibrary.GetEpisodeDetails",params=params)
+            return self.result_is_ok(r)
+        else:
+            return False
+
     def get_movies(self):
         if self.has_permission(permission="ReadData"):
             r = self.post(method="VideoLibrary.GetMovies")
@@ -85,6 +110,13 @@ class VideoLibrary(JSONRPC):
     def get_movie_details(self, params={}):
         if self.has_permission(permission="ReadData"):
             r = self.post(method="VideoLibrary.GetMovieDetails",params=params)
+            return self.result_is_ok(r)
+        else:
+            return False
+
+    def get_recently_added_episodes(self, params={}):
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="VideoLibrary.GetRecentlyAddedEpisodes",params=params)
             return self.result_is_ok(r)
         else:
             return False

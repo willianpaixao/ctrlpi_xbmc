@@ -28,6 +28,14 @@ class TestVideoLibrary(unittest.TestCase):
         t = r.get_episodes()
         self.assertGreaterEqual(t[u"limits"][u"total"], 0, msg=msg)
 
+    def test_get_episode_details(self):
+        t = r.get_episodes()
+        i = t[u"limits"][u"total"]
+        for j in xrange(1, i + 1):
+            t = r.get_episode_details(params={"episodeid": j})
+            if t:
+                print(t)
+
     def test_get_movies(self):
         msg="Video library not retrieved."
         s = {u'limits': {u'start': 0, u'total': 0, u'end': 0}}
@@ -39,20 +47,30 @@ class TestVideoLibrary(unittest.TestCase):
         i = t[u"limits"][u"total"]
         for j in xrange(1, i + 1):
             t = r.get_movie_details(params={"movieid": j})
-            print(t[u"moviedetails"])
+            if t:
+                print(t[u"moviedetails"])
+
+    def test_get_recently_added_episodes(self):
+        t = r.get_recently_added_episodes()
+        i = t[u"limits"][u"total"]
+        for j in xrange(1, i + 1):
+            t = r.get_movie_details(params={"episodeid": j})
+            if t:
+                print(t)
 
     def test_get_recently_added_movies(self):
         t = r.get_recently_added_movies()
         i = t[u"limits"][u"total"]
         for j in xrange(1, i + 1):
             t = r.get_movie_details(params={"movieid": j})
-            print(t[u"moviedetails"])
+            if t:
+                print(t[u"moviedetails"])
 
     def test_get_tvshows(self):
         msg="Video library not clean."
         s = {u'limits': {u'start': 0, u'total': 0, u'end': 0}}
         t = r.get_tvshows()
-        self.assertTrue(t == s, msg=msg)
+        self.assertGreater(t[u"limits"][u"total"], 0, msg=msg)
 
     def test_scan(self):
         self.assertTrue(r.scan())
