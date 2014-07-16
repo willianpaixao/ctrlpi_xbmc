@@ -15,8 +15,7 @@ class Files(JSONRPC):
         if self.has_permission(permission="ReadData"):
             r = self.post(method="Player.GetItem", params=params)
             return self.result_is_ok(r)
-        else:
-            return False
+        return False
 
 class Player(JSONRPC):
     """
@@ -51,9 +50,44 @@ class Player(JSONRPC):
         else:
             return False
 
+    def goto(self, params={}):
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Player.GoTo", params=params)
+            return self.result_is_ok(r)
+        else:
+            return False
+
+    def move(self, params={}):
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Player.Move", params=params)
+            return self.result_is_ok(r)
+        else:
+            return False
+
+    def open(self, params={}):
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Player.Open", params=params)
+            return self.result_is_ok(r)
+        else:
+            return False
+
     def play_pause(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Player.PlayPause", params=params)
+            return self.result_is_ok(r)
+        else:
+            return False
+
+    def rotate(self, params={}):
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Player.Rotate", params=params)
+            return self.result_is_ok(r)
+        else:
+            return False
+
+    def stop(self, params={}):
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Player.Stop", params=params)
             return self.result_is_ok(r)
         else:
             return False
@@ -153,10 +187,8 @@ class Playlist(System):
 
     def add(self, params):
         r = self.post(method="Playlist.Add", params=params)
-        if r and (r["result"] == u"OK"):
-            return True
-        else:
-            return False
+            return self.result_is_ok(r)
+        return False
 
     def clear(self, params):
         """
@@ -167,33 +199,43 @@ class Playlist(System):
         :rtype: True if successfully, False otherwise
         """
         r = self.post(method="Playlist.Clear", params=params)
-        if r and (r["result"] == u"OK"):
-            return True
-        else:
-            return False
+            return self.result_is_ok(r)
+        return False
 
     def get_items(self, params):
         r = self.post(method="Playlist.GetItems", params=params)
-        if r and ("result" in r):
-            return r["result"]
-        else:
-            return False
+            return self.result_is_ok(r)
+        return False
 
     def get_playlists(self):
         """
         Return all existing playlists.
         """
         r = self.post(method="Playlist.GetPlaylists")
-        if r and ("result" in r):
-            return r["result"]
-        else:
-            return False
+            return self.result_is_ok(r)
+        return False
 
     def get_playlist_properties(self, params):
         r = self.post(method="Playlist.GetProperties", params=params)
-        if r and ("result" in r):
-            return r["result"]
-        else:
-            return False
+            return self.result_is_ok(r)
+        return False
+
+    def insert(self, params):
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Playlist.Insert", params=params)
+            return self.result_is_ok(r)
+        return False
+
+    def remove(self, params):
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Playlist.Remove", params=params)
+            return self.result_is_ok(r)
+        return False
+
+    def swap(self, params):
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Playlist.Swap", params=params)
+            return self.result_is_ok(r)
+        return False
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4 textwidth=80

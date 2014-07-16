@@ -40,7 +40,10 @@ class TestPlayer(unittest.TestCase):
 
     def test_play_pause(self):
         s = r.play_pause(params={u"playerid": 1})
-        print(s)
+        self.assertTrue(s)
+
+    def test_stop(self):
+        s = r.stop(params={u"playerid": 1})
         self.assertTrue(s)
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4 textwidth=80
