@@ -40,57 +40,97 @@ class Player(JSONRPC):
         if self.has_permission(permission="ReadData"):
             r = self.post(method="Player.GetItem", params=params)
             return self.result_is_ok(r)
-        else:
-            return False
+        return False
 
     def get_properties(self, params={}):
         if self.has_permission(permission="ReadData"):
             r = self.post(method="Player.GetProperties", params=params)
             return self.result_is_ok(r)
-        else:
-            return False
+        return False
 
     def goto(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Player.GoTo", params=params)
             return self.result_is_ok(r)
-        else:
-            return False
+        return False
 
     def move(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Player.Move", params=params)
             return self.result_is_ok(r)
-        else:
-            return False
+        return False
 
     def open(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Player.Open", params=params)
             return self.result_is_ok(r)
-        else:
-            return False
+        return False
 
     def play_pause(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Player.PlayPause", params=params)
             return self.result_is_ok(r)
-        else:
-            return False
+        return False
 
     def rotate(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Player.Rotate", params=params)
             return self.result_is_ok(r)
-        else:
-            return False
+        return False
 
-    def stop(self, params={}):
+    def seek(self, params={}):
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Player.Seek", params=params)
+            return self.result_is_ok(r)
+        return False
+
+    def set_audio_stream(self, params={})
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Player.SetAudioStream", params=params)
+            return self.result_is_ok(r)
+        return False
+
+    def set_partymode(self, params={})
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Player.SetPartymode", params=params)
+            return self.result_is_ok(r)
+        return False
+
+    def set_repeat(self, params={})
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Player.SetRepeat", params=params)
+            return self.result_is_ok(r)
+        return False
+
+    def set_shuffle(self, params={})
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Player.SetShuffle", params=params)
+            return self.result_is_ok(r)
+        return False
+
+    def set_speed(self, params={})
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Player.SetSpeed", params=params)
+            return self.result_is_ok(r)
+        return False
+
+    def set_subtitle(self, params={})
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Player.SetSubtitle", params=params)
+            return self.result_is_ok(r)
+        return False
+
+    def stop(self, params={})
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Player.Stop", params=params)
             return self.result_is_ok(r)
-        else:
-            return False
+        return False
+
+    def zoom(self, params={}):
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Player.Zoom", params=params)
+            return self.result_is_ok(r)
+        return False
 
 class VideoLibrary(JSONRPC):
     """
