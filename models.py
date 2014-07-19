@@ -1,4 +1,4 @@
-rom django.db import models
+from django.db import models
 
 class Playlist(models.Model):
     title = models.CharField(max_length=512)

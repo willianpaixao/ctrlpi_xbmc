@@ -84,43 +84,43 @@ class Player(JSONRPC):
             return self.result_is_ok(r)
         return False
 
-    def set_audio_stream(self, params={})
+    def set_audio_stream(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Player.SetAudioStream", params=params)
             return self.result_is_ok(r)
         return False
 
-    def set_partymode(self, params={})
+    def set_partymode(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Player.SetPartymode", params=params)
             return self.result_is_ok(r)
         return False
 
-    def set_repeat(self, params={})
+    def set_repeat(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Player.SetRepeat", params=params)
             return self.result_is_ok(r)
         return False
 
-    def set_shuffle(self, params={})
+    def set_shuffle(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Player.SetShuffle", params=params)
             return self.result_is_ok(r)
         return False
 
-    def set_speed(self, params={})
+    def set_speed(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Player.SetSpeed", params=params)
             return self.result_is_ok(r)
         return False
 
-    def set_subtitle(self, params={})
+    def set_subtitle(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Player.SetSubtitle", params=params)
             return self.result_is_ok(r)
         return False
 
-    def stop(self, params={})
+    def stop(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Player.Stop", params=params)
             return self.result_is_ok(r)
@@ -225,12 +225,12 @@ class Playlist(System):
     def __init__(self, object):
         super(Playlist, self).__init__(object)
 
-    def add(self, params):
+    def add(self, params={}):
         r = self.post(method="Playlist.Add", params=params)
             return self.result_is_ok(r)
         return False
 
-    def clear(self, params):
+    def clear(self, params={}):
         """
         Resets a playlist.
 
@@ -242,7 +242,7 @@ class Playlist(System):
             return self.result_is_ok(r)
         return False
 
-    def get_items(self, params):
+    def get_items(self, params={}):
         r = self.post(method="Playlist.GetItems", params=params)
             return self.result_is_ok(r)
         return False
@@ -255,24 +255,24 @@ class Playlist(System):
             return self.result_is_ok(r)
         return False
 
-    def get_playlist_properties(self, params):
+    def get_playlist_properties(self, params={}):
         r = self.post(method="Playlist.GetProperties", params=params)
             return self.result_is_ok(r)
         return False
 
-    def insert(self, params):
+    def insert(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Playlist.Insert", params=params)
             return self.result_is_ok(r)
         return False
 
-    def remove(self, params):
+    def remove(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Playlist.Remove", params=params)
             return self.result_is_ok(r)
         return False
 
-    def swap(self, params):
+    def swap(self, params={}):
         if self.has_permission(permission="ControlPlayback"):
             r = self.post(method="Playlist.Swap", params=params)
             return self.result_is_ok(r)
