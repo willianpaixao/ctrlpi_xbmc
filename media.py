@@ -11,9 +11,27 @@ class Files(JSONRPC):
     def __init__(self, object):
         super(Files, self).__init__(object)
 
-    def get_item(self, params={}):
+    def get_directory(self, params={}):
         if self.has_permission(permission="ReadData"):
-            r = self.post(method="Player.GetItem", params=params)
+            r = self.post(method="Files.GetDirectory", params=params)
+            return self.result_is_ok(r)
+        return False
+
+    def get_file_details(self, params={}):
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="Files.GetFileDetails", params=params)
+            return self.result_is_ok(r)
+        return False
+
+    def get_sources(self, params={}):
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="Files.GetSources", params=params)
+            return self.result_is_ok(r)
+        return False
+
+    def prepare(self, params={}):
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="Files.PrepareDownload", params=params)
             return self.result_is_ok(r)
         return False
 
@@ -226,7 +244,8 @@ class Playlist(System):
         super(Playlist, self).__init__(object)
 
     def add(self, params={}):
-        r = self.post(method="Playlist.Add", params=params)
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Playlist.Add", params=params)
             return self.result_is_ok(r)
         return False
 
@@ -238,12 +257,14 @@ class Playlist(System):
         :type params: Playlist.Id
         :rtype: True if successfully, False otherwise
         """
-        r = self.post(method="Playlist.Clear", params=params)
+        if self.has_permission(permission="ControlPlayback"):
+            r = self.post(method="Playlist.Clear", params=params)
             return self.result_is_ok(r)
         return False
 
     def get_items(self, params={}):
-        r = self.post(method="Playlist.GetItems", params=params)
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="Playlist.GetItems", params=params)
             return self.result_is_ok(r)
         return False
 
@@ -251,12 +272,14 @@ class Playlist(System):
         """
         Return all existing playlists.
         """
-        r = self.post(method="Playlist.GetPlaylists")
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="Playlist.GetPlaylists")
             return self.result_is_ok(r)
         return False
 
     def get_playlist_properties(self, params={}):
-        r = self.post(method="Playlist.GetProperties", params=params)
+        if self.has_permission(permission="ReadData"):
+            r = self.post(method="Playlist.GetProperties", params=params)
             return self.result_is_ok(r)
         return False
 
