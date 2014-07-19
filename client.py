@@ -11,12 +11,20 @@ class JSONRPC(object):
         global data
         data = object
 
+    def get_configuration(self):
+        """
+        This method isn't working in Raspbmc.
+        """
+        r = self.post(method="JSONRPC.GetConfiguration")
+        return self.result_is_ok(r)
+
     def get_permission(self):
         r = self.post(method="JSONRPC.Permission")
-        if r and ("result" in r):
-            return r["result"]
-        else:
-            return False
+        return self.result_is_ok(r)
+
+    def instrospect(self, params={}):
+        r = self.post(method="JSONRPC.Introspect")
+        return self.result_is_ok(r)
 
     def has_permission(self, permission):
         r = self.get_permission()
@@ -25,12 +33,23 @@ class JSONRPC(object):
         else:
             return False
 
+    def notify_all(self, params={}):
+        """
+        .. todo: To figure out to where the hell these messages go.
+        """
+        r = self.post(method="JSONRPC.NotifyAll", params=params)
+        return self.result_is_ok(r)
+
     def ping(self):
         r = self.post("JSONRPC.Ping")
         if r and (r["result"] == u"pong"):
             return True
         else:
             return False
+
+    def set_configuration(self, params={}):
+        r = self.post(method="JSONRPC.SetConfiguration")
+        return self.result_is_ok(r)
 
     def post(self, method, params={}):
         """
@@ -56,6 +75,10 @@ class JSONRPC(object):
                 return r["result"]
         else:
             return False
+
+    def set_configuration(self):
+        r = self.post(method="JSONRPC.SetConfiguration")
+        print(r)
 
     def version(self):
         """
@@ -122,6 +145,14 @@ class System(JSONRPC):
 
     def __init__(self, object):
         super(System, self).__init__(object)
+
+    def cpu_usage(self, params={}):
+        """
+        .. todo: to be implemented. RPC not recognized by the server.
+        """
+        #r = self.post(method="System.CPUUsage", params=params)
+        #return self.result_is_ok(r)
+        return False
 
     def get_properties(self, params={}):
         r = self.post(method="System.GetProperties", params=params)
