@@ -158,6 +158,12 @@ class System(JSONRPC):
         r = self.post(method="System.GetProperties", params=params)
         return self.result_is_ok(r)
 
+    def get_tasks(self):
+        return False
+
+    def get_uptime(self):
+        return False
+
     def hibernate(self):
         """
         Hibernate the client.

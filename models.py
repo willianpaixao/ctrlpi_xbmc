@@ -1,6 +1,6 @@
 from django.db import models
 
-from ctrlpi_xbmc.client import JSONRPC
+from ctrlpi_xbmc.client import System
 
 class Playlist(models.Model):
     title = models.CharField(max_length=512)
@@ -41,16 +41,40 @@ class Node(models.Model):
         data["url"] = "http://" + self.address + ":" + str(self.port) + "/jsonrpc"
         return data
         
+    def get_tasks(self):
+        r = System(self.get_header())
+        s = r.get_tasks()
+        return s
+
+    def get_uptime(self):
+        r = System(self.get_header())
+        s = r.get_uptime()
+        return s
+
     def ping(self):
-        r = JSONRPC(self.get_header())
+        r = System(self.get_header())
         s = r.ping()
         return s
 
-    def task(self):
-        return "fake"
+    def hibernate(self):
+        r = System(self.get_header())
+        s = r.hibernate()
+        return s
 
-    def uptime(self):
-        return "fake"
+    def reboot(self):
+        r = System(self.get_header())
+        s = r.reboot()
+        return s
+
+    def shutdown(self):
+        r = System(self.get_header())
+        s = r.shutdown()
+        return s
+
+    def suspend(self):
+        r = System(self.get_header())
+        s = r.suspend()
+        return s
 
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4 textwidth=80
 
