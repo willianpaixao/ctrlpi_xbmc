@@ -5,6 +5,11 @@ class JSONRPC(object):
     """
     :Author:  Willian Paixao <willian.paixaoo@gmail.com>
     :Version: 0.01
+
+    Class the handles the JSONRPC queries. It's very important and one of the
+    most used classes by CTRLPi project.
+
+    Send GET and POST requests, handle HTTP authentication and test connection.
     """
 
     def __init__(self, object):
@@ -13,12 +18,17 @@ class JSONRPC(object):
 
     def get_configuration(self):
         """
+        Get client-specific configurations.
+
         This method isn't working in Raspbmc.
         """
         r = self.post(method="JSONRPC.GetConfiguration")
         return self.result_is_ok(r)
 
     def get_permission(self):
+        """
+        Retrieve the clients permissions. 
+        """
         r = self.post(method="JSONRPC.Permission")
         return self.result_is_ok(r)
 
@@ -35,7 +45,7 @@ class JSONRPC(object):
 
     def notify_all(self, params={}):
         """
-        .. todo: To figure out to where the hell these messages go.
+        .. todo: To figure out to where the hell these messages goes.
         """
         r = self.post(method="JSONRPC.NotifyAll", params=params)
         return self.result_is_ok(r)

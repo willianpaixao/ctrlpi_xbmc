@@ -42,11 +42,17 @@ class Node(models.Model):
         return data
         
     def get_tasks(self):
+        """
+        .. todo:: Not implemented yet.
+        """
         r = System(self.get_header())
         s = r.get_tasks()
         return s
 
     def get_uptime(self):
+        """
+        .. todo:: Not implemented yet.
+        """
         r = System(self.get_header())
         s = r.get_uptime()
         return s
@@ -57,6 +63,9 @@ class Node(models.Model):
         return s
 
     def hibernate(self):
+        """
+        Doesn't work on Raspberry Pi.
+        """
         r = System(self.get_header())
         s = r.hibernate()
         return s
@@ -72,6 +81,9 @@ class Node(models.Model):
         return s
 
     def suspend(self):
+        """
+        Doesn't work on Raspberry Pi.
+        """
         r = System(self.get_header())
         s = r.suspend()
         return s
